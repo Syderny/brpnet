@@ -1,5 +1,5 @@
 % transform original xml file annotations to overlay masks
-data_filefolder = '/data2/cong/kumar/monuseg/train/MoNuSeg_Training_Data';
+data_filefolder = 'C:/Users/DELL/workspace/brpnet/MoNuSeg 2018 Training Data';
 save_path = '.';
 
 tmp_name_list = dir([data_filefolder, '/', 'Annotations']);
@@ -29,7 +29,7 @@ if ~exist([save_path, '/', 'val', '/', 'masks'])
 end
 
 for iname = train_names
-    img = imread([data_filefolder, '/', 'Tissue_Images', '/', iname{1}, '.png']);
+    img = imread([data_filefolder, '/', 'Tissue Images', '/', iname{1}, '.tif']);
     [h, w , c] = size(img);
     [bmap, ~] = he_to_binary_mask_final([data_filefolder, '/', 'Annotations', '/', iname{1}], h, w);
     bmap  = uint16(bmap);
@@ -38,7 +38,7 @@ for iname = train_names
 end
 
 for iname = val_names
-    img = imread([data_filefolder, '/', 'Tissue_Images', '/', iname{1}, '.png']);
+    img = imread([data_filefolder, '/', 'Tissue Images', '/', iname{1}, '.tif']);
     [h, w , c] = size(img);
     [bmap, ~] = he_to_binary_mask_final([data_filefolder, '/', 'Annotations', '/', iname{1}], h, w);
     bmap  = uint16(bmap);

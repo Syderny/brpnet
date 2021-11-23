@@ -1,5 +1,5 @@
 % https://warwick.ac.uk/fac/cross_fac/tia/software/sntoolbox/
-addpath(genpath('PATH TO the stain_normalisation_toolbox')); 
+addpath(genpath('C:/Users/DELL/workspace/brpnet/data_generator_scripts/stain_normalisation_toolbox')); 
 
 dname = load('train_val_split_names.mat');
 train_names = dname.trainnames;

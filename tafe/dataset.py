@@ -39,12 +39,12 @@ class KumarDataset(torch.utils.data.Dataset):
         self.imgs = np.load(os.path.join(loc_head, 'data_after_stain_norm_ref1.npy'))
         self.imgs = self.imgs[list]
 
-        self.seg_labels = np.load(os.path.join(loc_head, 'gt.npy'))
+        self.seg_labels = np.load(os.path.join(loc_head, 'train_seg.npy'))
         self.seg_labels = self.seg_labels[list]
         # Instance labels to segmentation labels
         self.seg_labels[self.seg_labels>0] = 1
 
-        self.bnd_labels = np.load(os.path.join(loc_head, 'bnd.npy'))
+        self.bnd_labels = np.load(os.path.join(loc_head, 'train_bnd.npy'))
         self.bnd_labels = self.bnd_labels[list]
         
         self.naug = 6#ori*1 + rotate*3 + flip*2

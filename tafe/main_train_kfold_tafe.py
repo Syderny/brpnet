@@ -11,11 +11,11 @@ from dataset import KumarDataset
 from custom import *
 from loss import dice_loss, smooth_truncated_loss, compute_loss_list
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 torch.set_num_threads(8)
 
-batch_size = 3
+batch_size = 2
 val_batch_size = 2
 MAX_epoch = 600
 save_cp_after_n_epoch = 20
@@ -33,7 +33,7 @@ dice_weight = 0.5
 lr_redecay = ReduceMaxLROnRestart(0.5)
 crop_size = 256
 
-train_data_loc = '/home/cong/workplace/kumar/'
+train_data_loc = 'C:/Users/DELL/workspace/brpnet/data_generator_scripts/train'
 
 ndata = 16#len(os.listdir(os.path.join(train_data_loc, 'Images')))
 ntrain = 4
@@ -49,7 +49,7 @@ for iseed in list(range(ntrain)):
     net = UNet(input_modalities, n_pred_labels_type, n_pred_labels_bnd).cuda()
 
     train_data = KumarDataset(loc_head=train_data_loc, list=kfold_train_idx[iseed], crop_size=[crop_size, crop_size])
-    train_dataloader = data.DataLoader(train_data, batch_size=batch_size, shuffle=True, num_workers=6)
+    train_dataloader = data.DataLoader(train_data, batch_size=batch_size, shuffle=True)
 
     optimizer = AdamW(net.parameters(), lr=lr, weight_decay=weight_decay)
     scheduler = CyclicLRWithRestarts(optimizer, batch_size, len(train_data), restart_period=50, t_mult=2.0, policy="cosine", eta_on_restart_cb=lr_redecay)
